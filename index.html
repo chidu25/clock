@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Days Left Calculator</title>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+	<style>
+		body {
+			background: linear-gradient(to bottom right, #00ff00, #008000);
+			color: white;
+			font-family: 'Montserrat', sans-serif;
+		}
+		
+		h1 {
+			text-align: center;
+			margin-top: 50px;
+		}
+		
+		#clock {
+			font-size: 50px;
+			margin-top: 50px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<h1>Days, Hours, Minutes, and Seconds Left Calculator</h1>
+	<div id="clock"></div>
+
+	<script>
+		// Set the end date
+		var endDate = new Date("May 28, 2023 23:59:59").getTime();
+		
+		// Update the countdown every 1 second
+		var countdown = setInterval(function() {
+
+			// Get the current date and time
+			var now = new Date().getTime();
+
+			// Calculate the time remaining
+			var timeRemaining = endDate - now;
+
+			// Calculate the number of days, hours, minutes, and seconds remaining
+			var days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+			var hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+			var minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+			var seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+			// Display the countdown in the clock element
+			document.getElementById("clock").innerHTML = days + " days, " + hours + " hours, " + minutes + " minutes, and " + seconds + " seconds left";
+
+			// If the countdown is over, display "EXPIRED" and clear the countdown interval
+			if (timeRemaining < 0) {
+				document.getElementById("clock").innerHTML = "EXPIRED";
+				clearInterval(countdown);
+			}
+		}, 1000);
+	</script>
+</body>
+</html>
